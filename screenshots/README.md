@@ -1,40 +1,74 @@
-#WebApp UI Screenshots
+# WebApp UI Screenshots
+
 Home.png | Index/Home page screenshot
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Home.png "Check")
 API.png | API Page Screenshot
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API.png "Check")
 STATS-1.png | STATS page screenshot
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/STATS-1.png "Check")
 STATS-2.png |  continuation for STATS page screenshot
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/STATS-2.png "Check")
 
-#Checking known unsafe url and it's result
-N-Knwn_URL_Check.png | Checking known unsafe url on webpage
-N-Knwn_URL_Check-Result.png | Results of Checked known unsafe url on webpage
+# Checking known unsafe URLs and it'sResultt
 
-#Checking known safe url and it's result
-P-Knwn_URL_Check.png | Checking known safe url on webpage
-P-Knwn_URL_Check-Result.png | Results of Checked known safe url on webpage
+N-Knwn_URL_Check.png | Checking known unsafe URLs on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-Knwn_URL_Check.png "Check")
+N-Knwn_URL_Check-Result.png | Results of Checked known unsafe URL on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-Knwn_URL_Check-Result.png "Check")
 
-#Checking unknown unsafe url and it's result
-N-UnKnwn_URL_Check.png | Checking unknown unsafe url on webpage
-N-UnKnwn_URL_Check-Result.png |Result of the Checked unknown unsafe url on webpage
-N-UnKnwn_URL_Check-Result-Analysis.png |Analysis of the Checked unknown unsafe url on webpage
-N-UnKnwn_URL_Check-Result-Analysiss.png |Continuation for Analysis of the Checked unknown unsafe url on webpage
+# Checking known safe URLs and it'sResultt
 
-#Checking unknown safe url and it's result
-P-UnKnwn_URL_Check.png | Checking unknown safe url on webpage
-P-UnKnwn_URL_Check-Result.png |Result of the Checked unknown safe url on webpage
+P-Knwn_URL_Check.png | Checking known safe URL on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-Knwn_URL_Check.png "Check")
+P-Knwn_URL_Check-Result.png | Results of Checked known safe URL on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-Knwn_URL_Check-Result.png "Check")
+
+# Checking unknown unsafe URLs and their Result
+
+N-UnKnwn_URL_Check.png | Checking unknown unsafe URLs on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check.png "Check")
+N-UnKnwn_URL_Check-Result.png  Resultt of the Checked unknown unsafe URL on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result.png "Check")
+N-UnKnwn_URL_Check-Result-Analysis.png |Analysis of the Checked unknown unsafe URL on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result-Analysis.png "Check")
+N-UnKnwn_URL_Check-Result-Analysiss.png |Continuation for Analysis of the Checked unknown unsafe URL on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result-Analysiss.png "Check")
+
+# Checking unknown safe URLs and it'sResultt
+
+P-UnKnwn_URL_Check.png | Checking unknown safe URL on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check.png "Check")
+P-UnKnwn_URL_Check-Result.png  Resultt of the Checked unknown safe url on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result.png "Check")
 P-UnKnwn_URL_Check-Result-Analysis.png |Analysis of the Checked unknown safe url on webpage
-P-UnKnwn_URL_Check-Result-Analysiss.png |Continuation for Analysis of the Checked unknown safe url on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result-Analysis.png "Check")
+P-UnKnwn_URL_Check-Result-Analysiss.png |Continuation for Analysis of the Checked unknown safeURLl on the webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result-Analysiss.png "Check")
 
-#Checking Email on webpage and it's Results
+# Checking Email on the webpage and its Results
+
 Email_Check.png | Checking Email on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check.png "Check")
 Email_Check-Result.png | Results of Checked Email on webpage
-Email_Check-Resultt.png |Continuation for Results of Checked Email on webpage
-Email_Check-Resulttt.png |Continuation of Continuation for Results of Checked Email on webpage
-Email_Check-Resultttt.png |Continuation of Continuation of Continuation for Results of Checked Email on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Result.png "Check")
+Email_Check-Resultt.png | Continuation for Results of Checked Email on the Webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resultt.png "Check")
+Email_Check-Resulttt.png | Continuation of Continuation for Results of Checked Email on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resulttt.png "Check")
+Email_Check-Resultttt.png | Continuation of Continuation for Results of Checked Email on webpage
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resultttt.png "Check")
 
-#checking the API Functionalities 
-API-Check-Known-URL.png | Checking known both safe, unsafe url on API
+# Checking the API Functionalities 
+
+API-Check-Known-URL.png | Checking known both safe and  unsafe URLs on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Known-URL.png "Check")
 API-Report-Safe-URL&Check.png | Reporting a Unknown Safe url on API & checking it on API
-API-Report-UnSafe-URL&Check.png | Reporting a Unknown unSafe url on API & checking it on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-Safe-URL&Check.png "Check")
+API-Report-UnSafe-URL&Check.png | Reporting an Unknown unSafe URL on API & checking it on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-UnSafe-URL&Check.png "Check")
 API-Check-Safe-Mail.png | Checking a safe mail on API
-API-Check-UnSafe-Mail.png | Checking a unsafe mail on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Safe-Mail.png "Check")
+API-Check-UnSafe-Mail.png | Checking an unsafe mail on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-UnSafe-Mail.png "Check")
 API-Report-Email.png | Reporting a mail on API
+![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-Email.png "Check")
