@@ -412,7 +412,6 @@ class PhishingAnalyzer:
 #### TensorFlow Setup
 ```python
 # TensorFlow Configuration
-# Add this at the beginning of web_app.py, after imports
 import tensorflow as tf
 
 # TensorFlow Configuration Messages
