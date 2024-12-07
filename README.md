@@ -1,4 +1,4 @@
-# <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="50" width="50"/>PhishDefender: Complete Project Documentation
+# <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="50" width="50"/>PhishDefender
 
 ## Table of Contents
 1. Project Overview
