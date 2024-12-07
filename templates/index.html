@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phish-Defender</title>
+    <link rel="icon" href="{{ url_for('static', filename='ticon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .content-box {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tab-content {
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 .25rem .25rem;
+        }
+        .nav-tabs {
+            margin-bottom: 0;
+        }
+        .form-control-lg {
+            font-size: 1rem;
+        }
+        .analysis-option {
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .analysis-option:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .icon-large {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="max-width: 100px; height: 50px;" class="my-3">
+            </a>
+            <a href="{{ url_for('index') }}" class="my-0 mr-md-auto font-weight-normal">
+                <h5>Phish Defender</h5>
+            </a>
+            <a href="{{ url_for('stats') }}" class="btn btn-outline-info mr-1">Stats</a>
+            <a href="{{ url_for('api_instructions') }}" class="btn btn-outline-info mr-2">API</a>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+        </div>
+    </div>
+
+        <!-- Main Content -->
+        <div class="content-box">
+            <h1 class="text-center mb-4">Phishing Detection</h1>
+            
+            <!-- Analysis Options -->
+            <ul class="nav nav-tabs" id="analysisTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="url-tab" data-toggle="tab" href="#url" role="tab">
+                        URL Analysis
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="email-tab" data-toggle="tab" href="#email" role="tab">
+                        Email Analysis
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="analysisTabContent">
+                <!-- URL Analysis Tab -->
+                <div class="tab-pane fade show active" id="url" role="tabpanel">
+                    <form action="{{ url_for('check_content') }}" method="post">
+                        <input type="hidden" name="type" value="url">
+                        <div class="form-group">
+                            <label for="urlInput">Enter URL, Domain, or Link to Check</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-lg" id="urlInput" name="content" placeholder="https://example.com" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" alt="Check the Url/Link/Domain">Check
+                                        <img src="{{ url_for('static', filename='ticon.svg') }}" alt="Check the Url/Link/Domain" style="max-width: 30px; height: 30px;">
+                                    </button>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">
+                                Enter any URL, domain, or link to check if it's potentially malicious
+                            </small>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Email Analysis Tab -->
+                <div class="tab-pane fade" id="email" role="tabpanel">
+                    <form action="{{ url_for('check_content') }}" method="post">
+                        <input type="hidden" name="type" value="email">
+                        <div class="form-group">
+                            <label for="emailContent">Paste Email Content for Analysis</label>
+                            <textarea class="form-control" id="emailContent" name="content" rows="10" placeholder="Paste the complete email content here (including headers if available)..." required></textarea>
+                            <small class="form-text text-muted">
+                                We'll analyze the email content, links, and attachments for potential threats
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" alt="Analyze Email Content">Analyze Email
+                            <img src="{{ url_for('static', filename='ticon.svg') }}" alt="Analyze Email Content" style="max-width: 30px; height: 30px;">
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="analysis-option text-center">
+                        <div class="icon-large">🔍</div>
+                        <h4>URL Analysis</h4>
+                        <p>Check URLs, domains, and links against our database of known threats and perform real-time analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analysis-option text-center">
+                        <div class="icon-large">📧</div>
+                        <h4>Email Analysis</h4>
+                        <p>Analyze email content, embedded links, and attachments for phishing attempts and scams.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analysis-option text-center">
+                        <div class="icon-large">🤖</div>
+                        <h4>AI-Powered</h4>
+                        <p>Advanced AI analysis using machine learning and natural language processing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info mt-3">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Auto-format URL input
+        document.getElementById('urlInput').addEventListener('blur', function() {
+            let url = this.value.trim();
+            if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                this.value = 'https://' + url;
+            }
+        });
+
+        // Preserve tab state
+        $(document).ready(function(){
+            // Show active tab on page reload
+            let activeTab = localStorage.getItem('activeAnalysisTab');
+            if(activeTab){
+                $('#analysisTab a[href="' + activeTab + '"]').tab('show');
+            }
+
+            // Store active tab
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                localStorage.setItem('activeAnalysisTab', $(e.target).attr('href'));
+            });
+        });
+    </script>
+</body>
+</html>

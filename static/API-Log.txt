@@ -1,0 +1,234 @@
+1) Check Safe URL (Google)
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"https://www.google.com\"}" http://localhost:5000/api/check
+{
+  "findings": {
+    "legacy_analysis": null,
+    "new_analysis": {
+      "analysis_date": "Thu, 21 Nov 2024 03:09:52 GMT",
+      "result": 0,
+      "risk_score": 0.2
+    },
+    "phishing_domain": null,
+    "phishing_link": null,
+    "safe_domain": null,
+    "safe_link": null
+  },
+  "is_phishing": false,
+  "source": "database_check",
+  "url": "https://www.google.com"
+}
+
+2) Check Known Unsafe URL:
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"http://00000002.c1.biz\"}" http://localhost:5000/api/check
+{
+  "findings": {
+    "legacy_analysis": null,
+    "new_analysis": null,
+    "phishing_domain": {
+      "date_added": "Thu, 21 Nov 2024 00:13:12 GMT",
+      "last_checked": "Thu, 21 Nov 2024 00:13:12 GMT"
+    },
+    "phishing_link": {
+      "date_added": "Thu, 21 Nov 2024 00:41:06 GMT",
+      "last_checked": "Thu, 21 Nov 2024 00:41:06 GMT"
+    },
+    "safe_domain": null,
+    "safe_link": null
+  },
+  "is_phishing": true,
+  "source": "database_check",
+  "url": "http://00000002.c1.biz"
+}
+
+
+
+
+
+
+3) Check Safe Email
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"email_content\": \"From: support@google.com\nTo: user@example.com\nSubject: Welcome to Google Cloud Platform\n\nDear Valued Customer,\n\nThank you for choosing Google Cloud Platform. Your account has been successfully created.\n\nYou can access your dashboard here: https://console.cloud.google.com\n\nBest regards,\nGoogle Cloud Team\"}" http://localhost:5000/api/check
+{
+  "analysis_date": "Sat, 07 Dec 2024 18:53:45 GMT",
+  "content_analysis": {
+    "detailed": "After analyzing the email you provided, here are the results:\n\n1. Urgency or threats: This email does not have any language indicating urgency or threats.\n2. Grammar and spelling: The email does not contain any grammatical or spelling mistakes. \n3. Suspicious links: The link provided in the email appears to be valid and directing to the correct Google Cloud webpage. It's still advisable to not click on links within emails and to manually type them into your web browser.\n4. Requests for sensitive information: This email makes no request for sensitive information. \n5. Impersonation attempts: The email seems to be from 'support@google.com' which appears to be a legitimate source. However, it's always necessary to check the email header carefully to confirm the sender's true email address, as scammers can spoof the 'from' address to look like a legitimate source. Also, use of generic greetings like \"Dear Valued Customer\" might be used in phishing, as legitimate organizations usually personalize their emails with the customer's name.\n\nIn conclusion, there are no obvious signs of phishing in the email provided. However, remaining cautious and confirming the validity of such emails through alternative sources or by reaching out to the supposed sender via trusted contact methods remains key in preventing falling for potential phishing attempts. Always verify, don't necessarily trust.",
+    "findings": [
+      {
+        "description": "Attempts to impersonate a legitimate service",
+        "severity": "high"
+      }
+    ]
+  },
+  "is_phishing": false,
+  "threat_indicators": {
+    "impersonation": true,
+    "pressure_tactics": false,
+    "sensitive_info_request": false,
+    "suspicious_sender": false,
+    "suspicious_urls": 0,
+    "urgent_language": false
+  },
+  "threat_level": 0.2,
+  "threat_level_text": "Low Risk - Likely Safe",
+  "url_analysis": [
+    {
+      "features": {
+        "domain_age": 9945,
+        "has_ip": false,
+        "has_suspicious_tld": false,
+        "has_suspicious_words": false,
+        "is_https": true,
+        "length": 32,
+        "num_dots": 3,
+        "subdomain_count": 2,
+        "url_length_suspicious": false
+      },
+      "is_phishing": false,
+      "risk_score": 0.1,
+      "url": "https://console.cloud.google.com"
+    }
+  ],
+  "urls_found": [
+    "https://console.cloud.google.com"
+  ]
+}
+
+
+4) Check Unsafe Email
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"email_content\": \"From: security@netfl1x-account.com\nTo: user@email.com\nSubject: Urgent: Your Netflix Account Access Will Be Suspended\n\nDear Valued Netflix Customer,\n\nWe've detected unusual activity on your Netflix account. For your security, your account access will be suspended within 24 hours unless you verify your billing information immediately.\n\nTo prevent account suspension, please verify your information here:\nhttps://netfl1x-account-verify.tk/login\n\nNetflix Security Team\"}" http://localhost:5000/api/check
+{
+  "analysis_date": "Sat, 07 Dec 2024 18:56:55 GMT",
+  "content_analysis": {
+    "detailed": "Upon reviewing the email, I detect several phishing indicators:\n\n1. Urgency or threats: The email is creating urgency by stating the account will be suspended in 24 hours if not acted on immediately. This is a common tactic used in phishing attempts to prompt hasty actions.\n\n2. Grammar and spelling: While the email grammar and spelling seem correct, it's not enough to authenticate its legitimacy.\n\n3. Suspicious links: The link provided, netfl1x-account-verify.tk, is very suspicious. Legitimate Netflix emails would link back to the Netflix.com domain, not a different domain like \".tk\".\n\n4. Requests for sensitive information: The email is requesting the recipient to verify their billing information, which is a red flag. Companies usually don't ask for sensitive information via email.\n\n5. Impersonation attempts: The sender's email (security@netfl1x-account.com), while attempting to look like Netflix, is not an authentic Netflix domain. The real Netflix domain is \"Netflix.com\", but here the sender used \"netfl1x\" instead of \"Netflix\", which is a clear impersonation attempt.\n\nBased on these indicators, I believe this email is a phishing attempt.",
+    "findings": [
+      {
+        "description": "Found 1 suspicious URLs",
+        "severity": "high"
+      },
+      {
+        "description": "Uses urgent or threatening language",
+        "severity": "medium"
+      },
+      {
+        "description": "Requests sensitive information",
+        "severity": "high"
+      },
+      {
+        "description": "Uses pressure tactics",
+        "severity": "medium"
+      },
+      {
+        "description": "Attempts to impersonate a legitimate service",
+        "severity": "high"
+      }
+    ]
+  },
+  "is_phishing": true,
+  "threat_indicators": {
+    "impersonation": true,
+    "pressure_tactics": true,
+    "sensitive_info_request": true,
+    "suspicious_sender": false,
+    "suspicious_urls": 1,
+    "urgent_language": true
+  },
+  "threat_level": 1.05,
+  "threat_level_text": "High Risk - Likely Phishing Attempt",
+  "url_analysis": [
+    {
+      "features": {
+        "domain_age": -1,
+        "has_ip": false,
+        "has_suspicious_tld": true,
+        "has_suspicious_words": true,
+        "is_https": true,
+        "length": 39,
+        "num_dots": 1,
+        "subdomain_count": 0,
+        "url_length_suspicious": false
+      },
+      "is_phishing": true,
+      "risk_score": 0.7,
+      "url": "https://netfl1x-account-verify.tk/login"
+    }
+  ],
+  "urls_found": [
+    "https://netfl1x-account-verify.tk/login"
+  ]
+}
+
+
+5) Reporting a Safe URL & verifying it
+
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"https://microsoft.com\", \"type\": \"safe\"}" http://localhost:5000/api/report
+{
+  "message": "URL report submitted successfully",
+  "status": "success"
+}
+
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"https://microsoft.com\"}" http://localhost:5000/api/check
+{
+  "findings": {
+    "legacy_analysis": null,
+    "new_analysis": {
+      "analysis_date": "Sat, 07 Dec 2024 18:59:05 GMT",
+      "result": 0,
+      "risk_score": 0
+    },
+    "phishing_domain": null,
+    "phishing_link": null,
+    "safe_domain": {
+      "last_seen": "Sat, 07 Dec 2024 18:59:05 GMT"
+    },
+    "safe_link": {
+      "last_seen": "Sat, 07 Dec 2024 18:59:05 GMT"
+    }
+  },
+  "is_phishing": false,
+  "source": "database_check",
+  "url": "https://microsoft.com"
+}
+
+
+6) Reporting a UnSafe URL & verifying it
+
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"https://fake-paypal-login.tk\", \"type\": \"phishing\"}" http://localhost:5000/api/report
+{
+  "message": "URL report submitted successfully",
+  "status": "success"
+}
+
+
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"url\": \"https://fake-paypal-login.tk\"}" http://localhost:5000/api/check
+
+{
+  "findings": {
+    "legacy_analysis": null,
+    "new_analysis": {
+      "analysis_date": "Sat, 07 Dec 2024 19:02:17 GMT",
+      "result": 1,
+      "risk_score": 0
+    },
+    "phishing_domain": {
+      "date_added": "Sat, 07 Dec 2024 19:02:17 GMT",
+      "last_checked": "Sat, 07 Dec 2024 19:02:17 GMT"
+    },
+    "phishing_link": {
+      "date_added": "Sat, 07 Dec 2024 19:02:17 GMT",
+      "last_checked": "Sat, 07 Dec 2024 19:02:17 GMT"
+    },
+    "safe_domain": null,
+    "safe_link": null
+  },
+  "is_phishing": true,
+  "source": "database_check",
+  "url": "https://fake-paypal-login.tk"
+}
+
+
+7) Reporting a Email
+C:\Users\varun>curl -X POST -H "Content-Type: application/json" -d "{\"email_content\": \"From: billing@amaz0n-secure.tk\nTo: user@email.com\nSubject: Amazon Prime Membership Cancellation Notice\n\nDear Amazon Customer,\n\nYour Amazon Prime membership will be cancelled due to a payment issue. To prevent interruption, please update your payment information immediately:\n\nClick here to update: https://amaz0n-secure-billing.tk/verify\n\nAmazon Security Team\", \"type\": \"phishing\"}" http://localhost:5000/api/report
+{
+  "message": "Email report submitted successfully",
+  "status": "success",
+  "urls_found": 1
+}

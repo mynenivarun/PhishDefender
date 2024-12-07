@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phish-Defender - Analysis Results</title>
+    <link rel="icon" href="{{ url_for('static', filename='ticon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .feature-card {
+            margin-bottom: 1rem;
+        }
+        .risk-score {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .risk-low { color: #28a745; }
+        .risk-medium { color: #ffc107; }
+        .risk-high { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="max-width: 100px; height: 50px;" class="my-3">
+            </a>
+            <a href="{{ url_for('index') }}" class="my-0 mr-md-auto font-weight-normal">
+                <h5>Phish Defender</h5>
+            </a>
+            <a href="{{ url_for('stats') }}" class="btn btn-outline-info mr-1">Stats</a>
+            <a href="{{ url_for('api_instructions') }}" class="btn btn-outline-info mr-2">API</a>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+        </div>
+    </div>
+
+        <div class="text-center mb-4">
+            <h1>Analysis Results</h1>
+            <p class="lead">URL analyzed: <strong>{{ url }}</strong></p>
+
+            <div class="alert {{ 'alert-danger' if is_phishing else 'alert-success' }} mt-4">
+                <h4 class="alert-heading">
+                    {% if is_phishing %}
+                        ⚠️ Warning: Likely Phishing
+                    {% else %}
+                        ✅ Appears Safe
+                    {% endif %}
+                </h4>
+                <div class="risk-score {{ 'risk-high' if risk_score > 0.7 else 'risk-medium' if risk_score > 0.3 else 'risk-low' }}">
+                    Risk Score: {{ "%.2f"|format(risk_score) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- URL Features -->
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">URL Features</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for key, value in features.items() %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ key|replace('_', ' ')|title }}
+                                <span class="badge {{ 'badge-danger' if value in [True, 1] and key not in ['is_https', 'domain_age'] else 'badge-success' }}">
+                                    {{ value }}
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DNS Checks -->
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">DNS Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if dns_checks %}
+                            <ul class="list-group">
+                                {% for check in dns_checks %}
+                                <li class="list-group-item {{ 'text-danger' if 'suspicious' in check.lower() or 'error' in check.lower() }}">
+                                    {{ check }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-muted">No DNS issues detected</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Analysis -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Content Analysis</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ content_analysis|safe }}</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Check Another URL</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

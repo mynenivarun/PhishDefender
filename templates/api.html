@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Instructions</title>
+    <link rel="icon" href="{{ url_for('static', filename='ticon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .command-box {
+            align-content: center;
+            background-color: #000;
+            padding: 16px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1080px;
+        }
+        .command-box code {
+            color: #ff0000; /* Bright red color */
+        }
+        .copy-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            cursor: pointer;
+        }
+        .btn-tight {
+            margin-left: 775px; /* Adjust the gap as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <a href="{{ url_for('index') }}" class="my-3">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="max-width: 100px; height: 50px;">
+            </a>
+            <h5 class="my-0 mr-md-auto font-weight-normal">Phish Defender</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a href="{{ url_for('stats') }}" class="btn btn-outline-info mr-2">Stats</a>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+            </nav>
+        </div>
+    
+        <div class="text-center">
+            <h1 class="mt-5 mb-4">API Instructions</h1>
+            <p class="lead mb-5">Use our API to check and report URLs and emails programmatically. Copy the commands below to your terminal.</p>
+    
+            <!-- URL Check Section -->
+            <section class="mb-5">
+                <h2 class="mb-4">Check URLs and Emails</h2>
+    
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="h5 mb-0">Check a URL</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="command-box bg-light p-3 mb-2 rounded">
+                            <code>curl -X POST -H "Content-Type: application/json" -d '{"url": "https://www.google.com"}' http://localhost:5000/api/check</code>
+                            <button class="btn btn-sm btn-outline-secondary copy-btn mt-2">Copy</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h3 class="h5 mb-0">Check an Email</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="command-box bg-light p-3 mb-2 rounded">
+                            <code>curl -X POST -H "Content-Type: application/json" -d '{"email_content": "From: example@domain.com\nSubject: Test\nBody content here"}' http://localhost:5000/api/check</code>
+                            <button class="btn btn-sm btn-outline-secondary copy-btn mt-2">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Report Section -->
+            <section class="mb-5">
+                <h2 class="mb-4">Report URLs and Emails</h2>
+    
+                <div class="card mb-4">
+                    <div class="card-header bg-warning">
+                        <h3 class="h5 mb-0">Report a URL</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="command-box bg-light p-3 mb-2 rounded">
+                            <code>curl -X POST -H "Content-Type: application/json" -d '{"url": "https://suspicious-site.com","type": "phishing"}' http://localhost:5000/api/report</code>
+                            <button class="btn btn-sm btn-outline-secondary copy-btn mt-2">Copy</button>
+                        </div>
+                        <small class="text-muted">Use "type": "safe" for reporting safe URLs</small>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="h5 mb-0">Report an Email</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="command-box bg-light p-3 mb-2 rounded">
+                            <code>curl -X POST -H "Content-Type: application/json" -d '{"email_content": "Suspicious email content here","type": "phishing"}' http://localhost:5000/api/report</code>
+                            <button class="btn btn-sm btn-outline-secondary copy-btn mt-2">Copy</button>
+                        </div>
+                        <small class="text-muted">Use "type": "safe" for reporting safe emails</small>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Response Examples -->
+            <section class="mb-5">
+                <h2 class="mb-4">Response Examples</h2>
+    
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="h5 mb-0">URL Check Response</h3>
+                            </div>
+                            <div class="card-body">
+                                <pre class="bg-light p-3 rounded"><code>{
+      "url": "https://example.com",
+      "is_phishing": false,
+      "risk_score": 0.2,
+      "source": "database_check",
+      "analysis_date": "2024-11-22T..."
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="h5 mb-0">Email Check Response</h3>
+                            </div>
+                            <div class="card-body">
+                                <pre class="bg-light p-3 rounded"><code>{
+      "threat_level": 0.3,
+      "threat_level_text": "Low Risk",
+      "urls_found": ["..."],
+      "is_phishing": false,
+      "analysis_date": "2024-11-22T..."
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <style>
+        .command-box {
+            position: relative;
+            text-align: left;
+            overflow-x: auto;
+        }
+        
+        .command-box code {
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+        
+        pre {
+            margin-bottom: 0;
+        }
+        
+        .card {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+    
+    <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const code = btn.previousElementSibling.textContent;
+            navigator.clipboard.writeText(code);
+            
+            btn.textContent = 'Copied!';
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+            }, 2000);
+        });
+    });
+    </script>
+
+    <script>
+        function copyToClipboard(element) {
+            var tempElem = document.createElement('textarea');
+            tempElem.style.position = 'absolute';
+            tempElem.style.left = '-9999px';
+            tempElem.value = element.previousElementSibling.innerText;
+            document.body.appendChild(tempElem);
+
+            tempElem.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempElem);
+
+            element.textContent = 'Copied!';
+            setTimeout(() => {
+                element.textContent = 'Copy';
+            }, 2000);
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

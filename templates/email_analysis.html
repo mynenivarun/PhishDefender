@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Email Analysis</title>
+        <link rel="icon" href="{{ url_for('static', filename='ticon.svg') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .content-box {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .tab-content {
+                padding: 20px;
+                border: 1px solid #dee2e6;
+                border-top: none;
+                border-radius: 0 0 .25rem .25rem;
+            }
+            .nav-tabs {
+                margin-bottom: 0;
+            }
+            .form-control-lg {
+                font-size: 1rem;
+            }
+            .analysis-option {
+                border: 1px solid #dee2e6;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+            .analysis-option:hover {
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+                transform: translateY(-2px);
+            }
+            .icon-large {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="max-width: 100px; height: 50px;" class="my-3">
+            </a>
+            <a href="{{ url_for('index') }}" class="my-0 mr-md-auto font-weight-normal">
+                <h5>Phish Defender</h5>
+            </a>
+            <a href="{{ url_for('stats') }}" class="btn btn-outline-info mr-1">Stats</a>
+            <a href="{{ url_for('api_instructions') }}" class="btn btn-outline-info mr-2">API</a>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <h1>Email Analysis Results</h1>
+        
+        <div class="alert {% if analysis.threat_level > 0.7 %}alert-danger{% elif analysis.threat_level > 0.4 %}alert-warning{% else %}alert-success{% endif %} mt-4">
+            <h4 class="alert-heading">{{ analysis.threat_level_text }}</h4>
+            <div class="threat-level {% if analysis.threat_level > 0.7 %}threat-high{% elif analysis.threat_level > 0.4 %}threat-medium{% else %}threat-low{% endif %} d-inline-block">
+                Risk Score: {{ "%.2f"|format(analysis.threat_level) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Content Analysis Section -->
+        <div class="col-md-6 analysis-section">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Content Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>Key Findings:</h6>
+                        {% if analysis.content_analysis.findings %}
+                            {% for finding in analysis.content_analysis.findings %}
+                                <div class="alert {% if finding.severity == 'high' %}alert-danger{% elif finding.severity == 'medium' %}alert-warning{% else %}alert-info{% endif %}">
+                                    {{ finding.description }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-info">
+                                No suspicious elements detected
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mt-4">
+                        <h6>Detailed Analysis:</h6>
+                        <div class="analysis-text">
+                            {{ analysis.content_analysis.detailed|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- URLs Found Section -->
+        <div class="col-md-6 analysis-section">
+            <div class="card h-100">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">URLs Found ({{ analysis.urls_found|length }})</h5>
+                </div>
+                <div class="card-body">
+                    {% if analysis.urls_found %}
+                        {% for url_data in analysis.url_analysis %}
+                            <div class="card url-card mb-2">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ url_data.url }}</h6>
+                                    <span class="badge {% if url_data.risk_score > 0.7 %}badge-danger{% elif url_data.risk_score > 0.3 %}badge-warning{% else %}badge-success{% endif %}">
+                                        Risk Score: {{ "%.2f"|format(url_data.risk_score) }}
+                                    </span>
+                                    
+                                    {% if url_data.features %}
+                                        <div class="small mt-2">
+                                            Key Issues:
+                                            <ul>
+                                                {% for key, value in url_data.features.items() %}
+                                                    {% if value and key not in ['length', 'domain_age'] %}
+                                                        <li>{{ key|replace('_', ' ')|title }}</li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-info">
+                            No URLs found in the email content
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original Email Content Section -->
+    <div class="card mt-4 analysis-section">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Original Email Content</h5>
+        </div>
+        <div class="card-body">
+            <div class="email-content">
+                <pre class="pre-wrap">{{ content }}</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Analyze Another Email</a>
+        <button class="btn btn-outline-secondary mt-2" data-toggle="modal" data-target="#reportModal">
+            Report False Result
+        </button>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Report Analysis Result</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <div class="form-group">
+                            <label>Correct Classification:</label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="safeMail" name="classification" value="safe" class="custom-control-input">
+                                <label class="custom-control-label" for="safeMail">This Email is Safe</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="phishingMail" name="classification" value="phishing" class="custom-control-input">
+                                <label class="custom-control-label" for="phishingMail">This Email is Phishing</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comments">Additional Comments:</label>
+                            <textarea class="form-control" id="comments" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitReport">Submit Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS to your stylesheet -->
+<style>
+    .threat-level {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        margin-top: 1rem;
+    }
+    .threat-high {
+        background-color: #dc3545;
+        color: white;
+    }
+    .threat-medium {
+        background-color: #ffc107;
+        color: black;
+    }
+    .threat-low {
+        background-color: #28a745;
+        color: white;
+    }
+    .email-content {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.25rem;
+    }
+    .pre-wrap {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: monospace;
+        margin: 0;
+    }
+    .analysis-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    .url-card {
+        border-left: 4px solid #ffc107;
+    }
+</style>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phish-Defender - Statistics</title>
+    <link rel="icon" href="{{ url_for('static', filename='ticon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .stats-card {
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .table-fixed {
+            table-layout: fixed;
+        }
+        .table-fixed td {
+            word-wrap: break-word;
+        }
+        .url-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .detection-type {
+            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="max-width: 100px; height: 50px;" class="my-3">
+            </a>
+            <a href="{{ url_for('index') }}" class="my-0 mr-md-auto font-weight-normal">
+                <h5>Phish Defender</h5>
+            </a>
+            <a href="{{ url_for('stats') }}" class="btn btn-outline-info mr-1">Stats</a>
+            <a href="{{ url_for('api_instructions') }}" class="btn btn-outline-info mr-2">API</a>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+        </div>
+    </div>
+
+    <h1 class="text-center mb-4">Detection Statistics</h1>
+
+    <div class="row mb-4">
+        <!-- URLs Stats Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card stats-card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Analyzed URLs</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="stat-number mb-3">
+                        {{ urls_stats.total }}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-success">Safe</div>
+                            <h4>{{ urls_stats.safe }}</h4>
+                        </div>
+                        <div class="col">
+                            <div class="text-danger">Unsafe</div>
+                            <h4>{{ urls_stats.unsafe }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Domains Stats Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card stats-card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Known Domains</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="stat-number mb-3">
+                        {{ domains_stats.total }}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-success">Safe</div>
+                            <h4>{{ domains_stats.safe }}</h4>
+                        </div>
+                        <div class="col">
+                            <div class="text-danger">Unsafe</div>
+                            <h4>{{ domains_stats.unsafe }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Stats Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card stats-card">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Known Links</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="stat-number mb-3">
+                        {{ links_stats.total }}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-success">Safe</div>
+                            <h4>{{ links_stats.safe }}</h4>
+                        </div>
+                        <div class="col">
+                            <div class="text-danger">Unsafe</div>
+                            <h4>{{ links_stats.unsafe }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Detections Table -->
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Recent Phishing Detections</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>URL/Domain</th>
+                            <th>Risk Score</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detection in recent_detections %}
+                        <tr>
+                            <td>{{ detection.url }}</td>
+                            <td>
+                                {% if detection.risk_score != 'N/A' %}
+                                    <span class="badge {% if detection.risk_score > 0.7 %}badge-danger{% else %}badge-warning{% endif %}">
+                                        {{ "%.2f"|format(detection.risk_score) }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge badge-secondary">N/A</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge {% if 'phishing' in detection.source.lower() %}bg-danger text-white{% else %}bg-info text-white{% endif %}">
+                                    {{ detection.source }}
+                                </span>
+                            </td>
+                            <td>{{ detection.date|default('N/A', true) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .stats-card {
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .badge {
+            padding: 0.5em 0.8em;
+        }
+    </style>
+</div>
+</body>
+</html>

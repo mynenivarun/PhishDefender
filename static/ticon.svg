@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- Main Cyber Shield -->
+  <path d="M250 50
+           L420 150
+           L420 280
+           Q420 420 250 450
+           Q80 420 80 280
+           L80 150 Z"
+        fill="#0f172a"/>
+
+  <!-- Tech Grid Pattern -->
+  <path d="M250 80
+           L390 170
+           L390 270
+           Q390 390 250 420
+           Q110 390 110 270
+           L110 170 Z"
+        fill="#1e3a8a"/>
+        
+  <!-- Circuit Lines -->
+  <path d="M110 170 L390 170
+           M110 220 L390 220
+           M110 270 L390 270
+           M110 320 L390 320
+           M160 170 L160 320
+           M250 170 L250 320
+           M340 170 L340 320"
+        stroke="#2563eb"
+        stroke-width="2"
+        opacity="0.3"/>
+
+  <!-- Digital Shield Glow -->
+  <path d="M250 90
+           L370 170
+           L370 260
+           Q370 370 250 400
+           Q130 370 130 260
+           L130 170 Z"
+        fill="none"
+        stroke="#60a5fa"
+        stroke-width="2"
+        opacity="0.5"/>
+
+  <!-- Link Symbol -->
+  <path d="M190 220
+           Q160 220 160 250
+           Q160 280 190 280
+           L220 280"
+        fill="none"
+        stroke="#60a5fa"
+        stroke-width="25"
+        stroke-linecap="round"/>
+        
+  <path d="M310 220
+           Q340 220 340 250
+           Q340 280 310 280
+           L280 280"
+        fill="none"
+        stroke="#60a5fa"
+        stroke-width="25"
+        stroke-linecap="round"/>
+
+  <!-- @ Email Symbol -->
+  <path d="M250 200
+           A40 40 0 1 1 250 280
+           A40 40 0 1 1 250 200
+           M250 220
+           A20 20 0 1 0 250 260
+           L250 280
+           L290 260"
+        fill="none"
+        stroke="#3b82f6"
+        stroke-width="20"
+        stroke-linecap="round"/>
+
+  <!-- Block Line -->
+  <line x1="175" y1="175" 
+        x2="325" y2="325"
+        stroke="#ef4444"
+        stroke-width="25"
+        stroke-linecap="round"/>
+
+  <!-- Shield Border with Green Color -->
+  <path d="M250 50
+           L420 150
+           L420 280
+           Q420 420 250 450
+           Q80 420 80 280
+           L80 150 Z"
+        fill="none"
+        stroke="#22c55e"
+        stroke-width="6"/>
+        
+  <!-- Connection Points -->
+  <circle cx="110" cy="170" r="4" fill="#22c55e" opacity="0.8"/>
+  <circle cx="110" cy="270" r="4" fill="#22c55e" opacity="0.8"/>
+  <circle cx="390" cy="170" r="4" fill="#22c55e" opacity="0.8"/>
+  <circle cx="390" cy="270" r="4" fill="#22c55e" opacity="0.8"/>
+  <circle cx="250" cy="420" r="4" fill="#22c55e" opacity="0.8"/>
+  <circle cx="250" cy="50" r="4" fill="#22c55e" opacity="0.8"/>
+</svg>
