@@ -1,4 +1,4 @@
-# PhishDefender: Complete Project Documentation
+# <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="25" width="25"/>PhishDefender: Complete Project Documentation
 
 ## Table of Contents
 1. Project Overview
@@ -25,7 +25,7 @@ PhishDefender is a comprehensive web application designed to detect and analyze 
 - Email content analysis
 - Real-time phishing detection
 - Historical data tracking
-- API access
+- API Access
 - Statistical reporting
 
 ## 2. Installation & Setup
@@ -37,6 +37,21 @@ python --version
 
 # MongoDB installation required
 mongod --version
+
+# Verify TensorFlow installation
+python -c "import tensorflow as tf; print(tf.__version__)"
+
+# Download DistilBERT model (will be done automatically on first run)
+python -c "from transformers import pipeline; classifier = pipeline('text-classification', model='distilbert-base-uncased')"
+```
+
+### 2.1.1 Hardware Requirements
+```text
+Hardware Requirements:
+- Minimum 8GB RAM (16GB recommended)
+- CPU: Modern multi-core processor
+- GPU: Optional, but recommended for faster processing
+- Storage: At least 2GB free space for model downloads
 ```
 
 ### 2.2 Dependencies Installation
@@ -54,6 +69,9 @@ dnspython==2.1.0
 python-whois==0.7.3
 transformers==4.11.3
 openai==1.0.0
+tensorflow>=2.0.0
+transformers>=4.11.3
+torch>=1.9.0  
 ```
 
 ### 2.4 Configuration Setup
@@ -65,6 +83,13 @@ SECRET_KEY=your_secret_key
 MONGODB_URI_PHISH_LINKS=your_mongodb_uri
 MONGODB_URI_PHISHING_URLS=your_mongodb_uri
 OPENAI_API_KEY=your_openai_api_key
+```
+
+### 2.4.1Environment Setup
+```bash
+# Optional: TensorFlow configuration
+export TF_ENABLE_ONEDNN_OPTS=0  # If you want to disable oneDNN optimizations
+export CUDA_VISIBLE_DEVICES=0    # If using GPU
 ```
 
 ### 2.5 Running the Application
@@ -83,6 +108,7 @@ PhishDefender/
 ├── web_app.py              # Main application file
 ├── requirements.txt        # Project dependencies
 ├── static/                # Static assets
+│   ├── API-Log.txt        # API request logs
 │   ├── icon.png          # 225,276 bytes
 │   └── ticon.svg         # 2,608 bytes
 ├── templates/            # HTML templates
@@ -199,27 +225,41 @@ Content-Type: application/json
 
 ### 7.1 Web Interface
 - Home.png: Main interface
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Home.png "Home Page")
 - API.png: API documentation
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API.png "API Page")
 - STATS-1.png & STATS-2.png: Statistics dashboard
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/STATS-1.png "STATS Page")
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/STATS-2.png "STATS Page")
 
 ### 7.2 URL Analysis Examples
 1. Known URL Testing
    - N-Knwn_URL_Check.png: Testing known unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-Knwn_URL_Check.png "Check")
    - P-Knwn_URL_Check.png: Testing known safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-Knwn_URL_Check.png "Check")
 
 2. Unknown URL Analysis
    - N-UnKnwn_URL_Check.png: Testing unknown unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check.png "Check")
    - P-UnKnwn_URL_Check.png: Testing unknown safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check.png "Check")
 
 ### 7.3 Email Analysis
 - Email_Check.png: Email analysis interface
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check.png "Check")
 - Email_Check-Result.png: Analysis results
-- Continuation screenshots showing detailed analysis
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Result.png "Check")
+- Email_Check-Resultttt.png: Continuation screenshots showing detailed analysis
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resultttt.png "Check")
 
 ### 7.4 API Testing
 - API-Check-Known-URL.png: API URL testing
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Known-URL.png "Check")
 - API-Report-Safe-URL&Check.png: Safe URL reporting
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-Safe-URL&Check.png "Check")
 - API-Check-Safe-Mail.png: Email analysis via API
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Safe-Mail.png "Check")
 
 ## 8. Security Measures
 
@@ -340,6 +380,48 @@ class PhishingAnalyzer:
    - Input field analysis
    - Link patterns
    - Security indicators
+
+### 13.1.1 AI/ML Integration
+
+#### TensorFlow Setup
+```python
+# TensorFlow Configuration
+# Add this at the beginning of web_app.py, after imports
+import tensorflow as tf
+
+# TensorFlow Configuration Messages
+"""
+2024-11-21 04:44:13.176985: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. 
+You may see slightly different numerical results due to floating-point round-off errors from different computation orders. 
+To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+"""
+```
+
+#### DistilBERT Integration
+```python
+# Initialize AI models
+try:
+    # Initialize DistilBERT classifier
+    from transformers import pipeline
+    classifier = pipeline("text-classification", model="distilbert-base-uncased")
+    print("AI models initialized successfully")
+except Exception as e:
+    print(f"Error initializing AI models: {e}")
+    classifier = None
+
+"""
+Initialization Messages:
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint 
+at distilbert-base-uncased and are newly initialized: 
+['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+"""
+```
+
+#### Model Usage
+The DistilBERT model is used for:
+1. Text classification of URL content
+2. Phishing content detection
+3. Suspicious pattern recognition
 
 ### 13.2 Email Analysis System
 ```python
@@ -553,22 +635,26 @@ def handle_api_error(error):
 
 1. URL Testing Matrix
 ```
+-----------------------------------------
 | Test Case          | Expected Result |
 |--------------------|-----------------|
 | Known Safe URL     | Safe            |
 | Known Phishing URL | Unsafe          |
 | New URL            | Analysis Result |
 | Malformed URL      | Error Handler   |
+-----------------------------------------
 ```
 
 2. Email Testing Matrix
 ```
+-----------------------------------------
 | Test Case           | Expected Result |
 |---------------------|-----------------|
 | Clean Email         | Safe            |
 | Phishing Email      | Unsafe          |
 | Mixed Content       | Analysis Result |
 | Multiple URLs       | Multiple Checks |
+-----------------------------------------
 ```
 
 ## 14. Implementation Details
@@ -809,6 +895,42 @@ def handle_api_error(error):
         return "Connection error - check network"
     return "Unknown error occurred"
 ```
+### Troubleshooting ML Components
+
+```python
+def check_ml_components():
+    """Verify ML components are working"""
+    try:
+        # Check TensorFlow
+        import tensorflow as tf
+        print(f"TensorFlow version: {tf.__version__}")
+        
+        # Check DistilBERT
+        from transformers import pipeline
+        classifier = pipeline("text-classification", 
+                            model="distilbert-base-uncased")
+        
+        # Test classification
+        result = classifier("Test text")
+        return "ML components operational"
+    except Exception as e:
+        return f"ML component error: {str(e)}"
+```
+
+Common ML-related Issues:
+1. TensorFlow Warnings:
+   - oneDNN messages are normal and can be disabled
+   - Threading issues with OpenMP can be ignored for our use case
+
+2. DistilBERT Initialization:
+   - First run will download the model
+   - Initialization warnings about weights are normal
+   - Model performs classification despite warnings
+
+3. Performance Optimization:
+   - Use GPU if available
+   - Implement caching for repeated analyses
+   - Batch process URLs when possible
 
 ### 14.9 Future Enhancements
 
