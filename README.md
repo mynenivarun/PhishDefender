@@ -1,4 +1,4 @@
-# <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="25" width="25"/>PhishDefender: Complete Project Documentation
+# <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="50" width="50"/>PhishDefender: Complete Project Documentation
 
 ## Table of Contents
 1. Project Overview
@@ -193,7 +193,7 @@ Two MongoDB clusters:
    - Risk scoring
 
 ## 6. API Documentation
-
+[Check API Tested Logs Here](https://github.com/mynenivarun/PhishDefender/blob/main/static/API-Log.txt)
 ### 6.1 Check Endpoint
 ```bash
 POST /api/check
@@ -236,30 +236,56 @@ Content-Type: application/json
 1. Known URL Testing
    - N-Knwn_URL_Check.png: Testing known unsafe URL
    - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-Knwn_URL_Check.png "Check")
+   - N-Knwn_URL_Check-Result.png: Results known unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-Knwn_URL_Check-Result.png "Check")
    - P-Knwn_URL_Check.png: Testing known safe URL
    - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-Knwn_URL_Check.png "Check")
+   - P-Knwn_URL_Check-Result.png: Results known safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-Knwn_URL_Check-Result.png "Check")
 
 2. Unknown URL Analysis
    - N-UnKnwn_URL_Check.png: Testing unknown unsafe URL
    - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check.png "Check")
+   - N-UnKnwn_URL_Check-Result.png: Results of tested unknown unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result.png "Check")
+   - N-UnKnwn_URL_Check-Result-Analysis.png: 1 Analysis of tested unknown unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result-Analysis.png "Check")
+   - N-UnKnwn_URL_Check-Result-Analysiss.png: 2 Analysis of tested unknown unsafe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/N-UnKnwn_URL_Check-Result-Analysiss.png "Check")
    - P-UnKnwn_URL_Check.png: Testing unknown safe URL
    - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check.png "Check")
+   - P-UnKnwn_URL_Check-Result.png: Results of tested unknown safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result.png "Check")
+   - P-UnKnwn_URL_Check-Result-Analysis.png: 1 Analysis of tested unknown safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result-Analysis.png "Check")
+   - P-UnKnwn_URL_Check-Result-Analysiss.png: 2 Analysis of tested unknown safe URL
+   - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/P-UnKnwn_URL_Check-Result-Analysiss.png "Check")
 
 ### 7.3 Email Analysis
 - Email_Check.png: Email analysis interface
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check.png "Check")
 - Email_Check-Result.png: Analysis results
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Result.png "Check")
-- Email_Check-Resultttt.png: Continuation screenshots showing detailed analysis
+- Email_Check-Resultt.png: 1 Continuation screenshots showing detailed analysis
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resultt.png "Check")
+- Email_Check-Resulttt.png: 2 Continuation screenshots showing detailed analysis
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resulttt.png "Check")
+- Email_Check-Resultttt.png: 2 Continuation screenshots showing detailed analysis
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/Email_Check-Resultttt.png "Check")
 
 ### 7.4 API Testing
-- API-Check-Known-URL.png: API URL testing
+- API-Check-Known-URL.png: API URL testing for both unsafe and safe URLs
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Known-URL.png "Check")
-- API-Report-Safe-URL&Check.png: Safe URL reporting
+- API-Report-Safe-URL&Check.png: Safe URL reporting & Checking
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-Safe-URL&Check.png "Check")
-- API-Check-Safe-Mail.png: Email analysis via API
+- API-Report-UnSafe-URL&Check.png: UnSafe URL reporting & Checking
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-UnSafe-URL&Check.png "Check")
+- API-Check-Safe-Mail.png: Safe Email analysis via API
 - ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-Safe-Mail.png "Check")
+- API-Check-UnSafe-Mail.png: UnSafe Email analysis via API
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Check-UnSafe-Mail.png "Check")
+- API-Report-Email.png: Reporting an Email via API
+- ![alt text](https://github.com/mynenivarun/PhishDefender/blob/main/screenshots/API-Report-Email.png "Check")
 
 ## 8. Security Measures
 
@@ -509,7 +535,7 @@ def store_analysis_result(url, domain, is_phishing, analysis_data):
 ```
 
 ### 13.5 API Implementation
-
+[Check API Tested Logs Here](https://github.com/mynenivarun/PhishDefender/blob/main/static/API-Log.txt)
 #### 1. Check Endpoint
 ```python
 @app.route('/api/check', methods=['POST'])
@@ -723,7 +749,7 @@ except Exception as e:
 ```
 
 ### 14.3 API Usage Examples
-
+[Check API Tested Logs Here](https://github.com/mynenivarun/PhishDefender/blob/main/static/API-Log.txt)
 #### 1. URL Check Example
 ```bash
 # Windows PowerShell
@@ -952,8 +978,8 @@ Common ML-related Issues:
 For support:
 1. Check documentation
 2. Review error logs
-3. Contact system administrator
-4. Submit issue on GitHub
+3. Contact system me
+4. Submit an issue on GitHub
 
-Project Repository: https://github.com/mynenivarun/PhishDefender
+[You Can Reach ME Here!](https://mynenivarun.pythonanywhere.com)
 
