@@ -1,21 +1,21 @@
 # <img src="https://github.com/mynenivarun/PhishDefender/blob/main/static/ticon.svg" height="50" width="50"/>PhishDefender
 
 ## Table of Contents
-1. Project Overview
-2. Installation & Setup
-3. Project Structure
-4. Technical Architecture
-5. Features & Functionality
-6. Database Architecture
-7. API Documentation
-8. Web Interface Guide
-9. Screenshots & UI Documentation
-10. Security Considerations
-11. Dependencies & Requirements
-12. Code Documentation
-13. Testing
-14. Deployment Guide
-15. Troubleshooting
+1. [Project Overview](#1-project-overview)
+2. [Installation & Setup](#2-installation--setup)
+3. [Project Structure](#3-project-structure)
+4. [Technical Architecture](#4-technical-architecture)
+5. [Features & Functionality](#5-core-functionality)
+6. [API Documentation](#6-api-documentation)
+7. [Screenshots Guide](#7-screenshots-guide)
+8. [Security Measures](#8-security-measures)
+9. [Error Handling](#9-error-handling)
+10. [Deployment Guide](#10-deployment-guide)
+11. [Testing Guidelines](#11-testing-guidelines)
+12. [Maintenance](#12-maintenance)
+13. [Detailed Component Analysis](#13-detailed-component-analysis)
+14. [Implementation Details](#14-implementation-details)
+15. [Troubleshooting](#15-troubleshooting)
 
 ## 1. Project Overview
 PhishDefender is a comprehensive web application designed to detect and analyze potential phishing URLs, domains, and emails using machine learning, AI content analysis, and multiple data sources for accurate phishing detection.
