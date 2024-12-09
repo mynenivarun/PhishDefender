@@ -14,8 +14,8 @@
 11. [Testing Guidelines](#11-testing-guidelines)
 12. [Maintenance](#12-maintenance)
 13. [Detailed Component Analysis](#13-detailed-component-analysis)
-14. [Implementation Details](#14-implementation-details)
-15. [Troubleshooting](#15-troubleshooting)
+14. [Implementation Details & Troubleshooting](#14-implementation-details)
+15. [Contact ME](#15-contact-me)
 
 ## 1. Project Overview
 PhishDefender is a comprehensive web application designed to detect and analyze potential phishing URLs, domains, and emails using machine learning, AI content analysis, and multiple data sources for accurate phishing detection.
@@ -682,7 +682,7 @@ def handle_api_error(error):
 -----------------------------------------
 ```
 
-## 14. Implementation Details
+## 14. Implementation Details & Troubleshooting
 
 ### 14.1 Machine Learning Components
 
@@ -980,5 +980,7 @@ For support:
 3. Contact system me
 4. Submit an issue on GitHub
 
+
+## 15. Contact ME
 [You Can Reach ME Here!](https://mynenivarun.pythonanywhere.com)
 
