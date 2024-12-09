@@ -14,7 +14,7 @@
 11. [Testing Guidelines](#11-testing-guidelines)
 12. [Maintenance](#12-maintenance)
 13. [Detailed Component Analysis](#13-detailed-component-analysis)
-14. [Implementation Details & Troubleshooting](#14-implementation-details)
+14. [Implementation Details & Troubleshooting](#14-implementation-details-&-troubleshooting)
 15. [Contact ME](#15-contact-me)
 
 ## 1. Project Overview
